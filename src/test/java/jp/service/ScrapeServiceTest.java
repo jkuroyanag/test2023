@@ -1,5 +1,6 @@
-package jp.sample;
+package jp.service;
 
+import jp.service.ScrapeService;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package jp.sample;
+package jp.service;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
