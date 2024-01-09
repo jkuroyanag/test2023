@@ -1,9 +1,15 @@
 package jp.sample;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.io.IOException;
 
-public class Main {
+@SpringBootApplication
+public class TestApplication {
     public static void main(String[] args) throws IOException {
+        SpringApplication.run(TestApplication.class,args);
+
         final ScrapeService scrapeService = new ScrapeService();
         System.out.println(scrapeService.getTitle());
     }
