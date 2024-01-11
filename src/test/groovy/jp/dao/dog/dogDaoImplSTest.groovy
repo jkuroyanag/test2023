@@ -17,6 +17,64 @@ class dogDaoImplSTest extends Specification {
         selector.ownerId = 101L // setupで設定した項目は全てのテストに適用される
     }
 
+    def "全件取得"() {
+        given:
+        selector.dogId = [1L, 2L]
+
+        when:
+        def actual = dao.select(selector)
+
+        then:
+        assert actual.size() == 2
+        actual[0].with {
+            assert dogId == 1L
+            assert dogName == "moku"
+            assert dogBreed == "pomeranian"
+        }
+        actual[1].with {
+            assert dogId == 2L
+            assert dogName == "mugi"
+            assert dogBreed == "pekingese"
+        }
+    }
+
+    def "dogId指定なし"() {
+        given:
+//        selector.dogId = [1L, 2L]
+
+        when:
+        def actual = dao.select(selector)
+
+        then:
+        assert actual.size() == 2
+        actual[0].with {
+            assert dogId == 1L
+            assert dogName == "moku"
+            assert dogBreed == "pomeranian"
+        }
+        actual[1].with {
+            assert dogId == 2L
+            assert dogName == "mugi"
+            assert dogBreed == "pekingese"
+        }
+    }
+
+    def "1件指定"() {
+        given:
+        selector.dogId = [2L]
+
+        when:
+        def actual = dao.select(selector)
+
+        then:
+        assert actual.size() == 1
+        actual[0].with {
+            assert dogId == 2L
+            assert dogName == "mugi"
+            assert dogBreed == "pekingese"
+        }
+    }
+
     @Unroll
     // パラメタライズテストを行う際には@Unrollアノテーションを付与
     def "複数件取得 #testCase"() { // #の後にwhere区のパラメータを設定することでテスト名を動的に変化させることが出来る
@@ -28,17 +86,17 @@ class dogDaoImplSTest extends Specification {
         def actual = dao.select(selector)
 
         then: // 上記のwhenで指定した振る舞いに対する結果をアサーション
-        assert actual.size() == 2
-        actual[pSize].with {
+        assert actual.size() == 1
+        actual[0].with {
             assert dogId == eDogId
             assert dogName == eDogName
             assert dogBreed == eDogBreed
         }
 
         where: //ここでパラメタライズの設定を行う、今回は2テストパターンが実行される
-        testCase             | pSize | pDogId || eDogId | eDogName | eDogBreed
-        "ドッグIDが101の犬情報" | 0     | 1L     || 1L     | "moku"   | "pomeranian"
-        "ドッグIDが102の犬情報" | 1     | 2L     || 2L     | "mugi"   | "pekingese"
+        testCase             | pDogId || eDogId | eDogName | eDogBreed
+        "ドッグIDが101の犬情報" | [1L]   || 1L     | "moku"   | "pomeranian"
+        "ドッグIDが102の犬情報" | [2L]   || 2L     | "mugi"   | "pekingese"
     }
 }
 
