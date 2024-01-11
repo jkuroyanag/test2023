@@ -54,4 +54,22 @@
         </if>
     </delete>
 
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!-- UPDATE                                       -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <update id="update" parameterType="jp.dao.dog.DogDtoSelector">
+        UPDATE dog
+        SET dog_name =
+        <foreach collection="dogName" item="oneDogName">
+            #{oneDogName}
+        </foreach>
+        <if test="dogId != null and dogId.size() > 0">
+            WHERE dog_id IN
+            <foreach collection="dogId" item="oneDogId" open="(" close=")" separator=",">
+                #{oneDogId}
+            </foreach>
+        </if>
+        AND dog_breed = #{dogBreed}
+    </update>
+
 </mapper>

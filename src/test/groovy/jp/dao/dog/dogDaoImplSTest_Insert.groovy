@@ -28,7 +28,7 @@ class dogDaoImplSTest_Insert extends Specification {
         def actualSize = dao.insert(insertDog)
         def actual = dao.select(selectDog)
         //手動削除
-        def remove = dao.remove(selectDog)
+//        def remove = dao.remove(selectDog)
 
         then:
         assert actualSize == 1
