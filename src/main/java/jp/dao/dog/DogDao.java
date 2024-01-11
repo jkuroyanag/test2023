@@ -5,4 +5,6 @@ import java.util.List;
 public interface DogDao {
 
     List<DogDto> select(DogDtoSelector selector);
+
+    int insert(Dog dog);
 }
