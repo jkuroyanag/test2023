@@ -23,4 +23,9 @@ public class DogDaoImpl extends MyBatisDaoBase implements DogDao {
     public int insert(Dog dog) {
         return this.getSqlSession().getMapper(DogMapper.class).insert(dog);
     }
+
+    @Override
+    public int remove(DogDtoSelector selector) {
+        return this.getSqlSession().getMapper(DogMapper.class).remove(selector);
+    }
 }

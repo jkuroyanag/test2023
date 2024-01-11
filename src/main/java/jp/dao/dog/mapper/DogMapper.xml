@@ -40,4 +40,18 @@
         )
     </insert>
 
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!-- REMOVE                                       -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <delete id="remove" parameterType="jp.dao.dog.DogDtoSelector">
+        DELETE
+        FROM dog
+        <if test="dogId != null and dogId.size() > 0">
+            WHERE dog_id IN
+            <foreach collection="dogId" item="oneDogId" open="(" close=")" separator=",">
+                #{oneDogId}
+            </foreach>
+        </if>
+    </delete>
+
 </mapper>
