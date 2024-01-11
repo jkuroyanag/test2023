@@ -7,4 +7,6 @@ public interface DogDao {
     List<DogDto> select(DogDtoSelector selector);
 
     int insert(Dog dog);
+
+    int remove(DogDtoSelector selector);
 }
