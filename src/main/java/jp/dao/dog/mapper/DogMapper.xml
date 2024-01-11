@@ -8,6 +8,9 @@
         <result column="dog_breed" property="dogBreed" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!-- SELECT                                       -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
     <select id="select" resultMap="BaseResultMap" parameterType="jp.dao.dog.DogDtoSelector">
         SELECT *
         FROM dog
@@ -18,4 +21,23 @@
             </foreach>
         </if>
     </select>
+
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!-- INSERT                                       -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++-->
+    <insert id="insert" parameterType="jp.dao.dog.Dog">
+        INSERT INTO dog
+        (
+        dog_id,
+        dog_name,
+        dog_breed
+        )
+        values
+        (
+        #{dogId},
+        #{dogName},
+        #{dogBreed}
+        )
+    </insert>
+
 </mapper>
