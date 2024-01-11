@@ -17,30 +17,9 @@ class dogDaoImplSTest extends Specification {
         selector.ownerId = 101L // setupで設定した項目は全てのテストに適用される
     }
 
-    def "全件取得"() {
+    def "全件取得 - 指定なし"() {
         given:
-        selector.dogId = [1L, 2L]
-
-        when:
-        def actual = dao.select(selector)
-
-        then:
-        assert actual.size() == 2
-        actual[0].with {
-            assert dogId == 1L
-            assert dogName == "moku"
-            assert dogBreed == "pomeranian"
-        }
-        actual[1].with {
-            assert dogId == 2L
-            assert dogName == "mugi"
-            assert dogBreed == "pekingese"
-        }
-    }
-
-    def "dogId指定なし"() {
-        given:
-//        selector.dogId = [1L, 2L]
+//        selector.dogId = [1L, 2L] 指定しない
 
         when:
         def actual = dao.select(selector)
@@ -99,4 +78,3 @@ class dogDaoImplSTest extends Specification {
         "ドッグIDが102の犬情報" | [2L]   || 2L     | "mugi"   | "pekingese"
     }
 }
-
