@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.dao.dog.mapper.DogMapper">
+
+    <resultMap id="BaseResultMap" type="jp.dao.dog.DogDto">
+        <id column="dog_id" property="dogId" jdbcType="DECIMAL"/>
+        <result column="dog_name" property="dogName" jdbcType="VARCHAR"/>
+        <result column="dog_breed" property="dogBreed" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="jp.dao.dog.DogDtoSelector">
+        SELECT *
+        FROM dog
+        <if test="dogId != null and dogId.size() > 0">
+            WHERE dog_id IN
+            <foreach collection="dogId" item="oneDogId" open="(" close=")" separator=",">
+                #{oneDogId}
+            </foreach>
+        </if>
+    </select>
+</mapper>
