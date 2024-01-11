@@ -13,4 +13,6 @@ public interface DogMapper {
     int insert(Dog dog);
 
     int remove(DogDtoSelector selector);
+
+    int update(DogDtoSelector selector);
 }

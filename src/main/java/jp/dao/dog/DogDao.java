@@ -9,4 +9,6 @@ public interface DogDao {
     int insert(Dog dog);
 
     int remove(DogDtoSelector selector);
+
+    int update(DogDtoSelector selector);
 }
